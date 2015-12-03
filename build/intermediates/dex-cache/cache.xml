@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/393359/Downloads/1.3.6CollegeApp_StarterCode/CollegeApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/393359/Downloads/1.3.6CollegeApp_StarterCode/CollegeApp/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-3750c6ac00e27691ae17855a1b939dae5569f625.jar" />
+    </item>
+    <item
+        jar="/Volumes/Multiuser Partition/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/393359/Downloads/1.3.6CollegeApp_StarterCode/CollegeApp/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-edc12e23df35501b4cf2f4ceec9b1412d13f2b48.jar" />
+    </item>
+    <item
+        jar="/Users/393359/Downloads/1.3.6CollegeApp_StarterCode/CollegeApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/393359/Downloads/1.3.6CollegeApp_StarterCode/CollegeApp/app/build/intermediates/pre-dexed/debug/classes-4b717315b26a54bcfa116ab177fec5102ca4db0d.jar" />
+    </item>
+    <item
+        jar="/Users/393359/Downloads/1.3.6CollegeApp_StarterCode/CollegeApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/393359/Downloads/1.3.6CollegeApp_StarterCode/CollegeApp/app/build/intermediates/pre-dexed/debug/classes-3486654a56b87ad98801c1a0665efe790ed80ef1.jar" />
+    </item>
+
+</items>
