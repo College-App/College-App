@@ -17,7 +17,7 @@ import java.util.GregorianCalendar;
 
 /**
  * Created by wdumas on 12/23/2014.
- * Minecraft is love
+ *
  */
 public class DoBPickerFragment extends DialogFragment {
 

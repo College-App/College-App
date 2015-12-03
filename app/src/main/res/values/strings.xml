@@ -14,5 +14,7 @@
     <string name="new_guardian">Add Guardian</string>
     <string name="new_sibling">Add Sibling</string>
     <string name="occupation">Occupation</string>
+    <string name="gpa">GPA</string>
+    <string name="sat">SAT</string>
 
 </resources>
