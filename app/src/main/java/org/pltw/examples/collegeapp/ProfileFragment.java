@@ -39,6 +39,8 @@ public class ProfileFragment extends Fragment {
     private EditText mEnterLastName;
     private Button mDoBButton;
     private Context mAppContext;
+    private EditText gpa;
+    private EditText sat;
 
     private Chronometer c;
 
@@ -98,12 +100,18 @@ public class ProfileFragment extends Fragment {
         mEnterLastName = (EditText)rootView.findViewById(R.id.enter_last_name);
         mDoBButton = (Button)rootView.findViewById(R.id.dob_button);
 
+
+        gpa = (EditText)rootView.findViewById(R.id.gpa);
+        sat = (EditText)rootView.findViewById(R.id.sat);
+
         mFirstName.setText(mProfile.getFirstName());
         mLastName.setText(mProfile.getLastName());
 
         FirstNameTextChanger firstNameTextChanger = new FirstNameTextChanger();
         LastNameTextChanger lastNameTextChanger = new LastNameTextChanger();
         DoBButtonOnClickListener doBButtonOnClickListener = new DoBButtonOnClickListener();
+        SatTextChanger satTextChanger = new SatTextChanger();
+        GpaTextChanger gpaTextChanger = new GpaTextChanger();
 
         updateDoB();
         mDoBButton.setOnClickListener(doBButtonOnClickListener);
@@ -111,6 +119,10 @@ public class ProfileFragment extends Fragment {
         mEnterFirstName.addTextChangedListener(firstNameTextChanger);
 
         mEnterLastName.addTextChangedListener(lastNameTextChanger);
+
+        gpa.addTextChangedListener(gpaTextChanger);
+        sat.addTextChangedListener(satTextChanger);
+
         mAppContext = this.getActivity();
         Log.d(TAG, "Context: " + mAppContext);
         mStorer = new ProfileJSONStorer(mAppContext, FILENAME);
@@ -141,6 +153,9 @@ public class ProfileFragment extends Fragment {
         mEnterFirstName.setTypeface(ApplicantActivity.tf);
         mEnterLastName.setTypeface(ApplicantActivity.tf);
         mLastName.setTypeface(ApplicantActivity.tf);
+
+        gpa.setTypeface(ApplicantActivity.tf);
+        sat.setTypeface(ApplicantActivity.tf);
 
         return rootView;
 
@@ -188,6 +203,40 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    private class SatTextChanger implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            mProfile.setSAT(Integer.parseInt(s.toString()));
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            sat.setText(mProfile.getSAT());
+        }
+    }
+
+    private class GpaTextChanger implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            mProfile.setGPA(Double.parseDouble(s.toString()));
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            gpa.setText(Double.toString(mProfile.getGPA()));
+        }
+    }
+
     private class DoBButtonOnClickListener implements View.OnClickListener {
         public void onClick(View v) {
             FragmentManager fm = getActivity()
@@ -231,6 +280,8 @@ public class ProfileFragment extends Fragment {
             mFirstName.setText(mProfile.getFirstName());
             mLastName.setText(mProfile.getLastName());
             updateDoB();
+            sat.setText(mProfile.getSAT());
+            gpa.setText(Double.toString(mProfile.getGPA()));
         } catch (Exception e) {
             mProfile = new Profile();
             Log.e(TAG, "Error loading profile from: " + FILENAME, e);

@@ -15,10 +15,14 @@ public class Profile implements ApplicantData{
     private static final String JSON_FIRST_NAME = "firstName";
     private static final String JSON_LAST_NAME = "lastName";
     private static final String JSON_DOB = "dob";
+    private static final String JSON_GPA = "gpa";
+    private static final String JSON_SAT = "sat";
 
     private String mFirstName;
     private String mLastName;
     private Date mDateOfBirth;
+    private double GPA;
+    private int SAT;
 
     public String getFirstName() {
         return mFirstName;
@@ -40,11 +44,29 @@ public class Profile implements ApplicantData{
         return mDateOfBirth;
     }
 
+    public int getSAT(){
+        return SAT;
+    }
+
+    public void setSAT(int a){
+        SAT = a;
+    }
+
+    public double getGPA(){
+        return GPA;
+    }
+
+    public void setGPA(double a){
+        GPA = a;
+    }
+
     public JSONObject toJSON() throws JSONException {
         JSONObject json = new JSONObject();
         json.put(JSON_FIRST_NAME, mFirstName);
         json.put(JSON_LAST_NAME, mLastName);
         json.put(JSON_DOB, mDateOfBirth.getTime());
+        json.put(JSON_GPA, GPA);
+        json.put(JSON_SAT, SAT);
         System.out.println("Date of Birth Saved: " + mDateOfBirth);
         return json;
     }
@@ -62,12 +84,17 @@ public class Profile implements ApplicantData{
         mFirstName = new String("Wyatt");
         mLastName = new String("Dumas");
         mDateOfBirth = new Date(83, 0, 24);
+        GPA = 0;
+        SAT = 0;
     }
 
     public Profile(JSONObject json) throws JSONException {
         mFirstName = json.getString(JSON_FIRST_NAME);
         mLastName = json.getString(JSON_LAST_NAME);
         mDateOfBirth = new Date(json.getLong(JSON_DOB));
+        GPA = Double.parseDouble(json.getString(JSON_GPA));
+        SAT = Integer.parseInt(json.getString(JSON_SAT));
+
     }
 
     public String toString() {
