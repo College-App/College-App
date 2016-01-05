@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
@@ -16,8 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -41,6 +45,11 @@ public class ProfileFragment extends Fragment {
     private Context mAppContext;
     private EditText gpa;
     private EditText sat;
+    private TextView gpaText;
+    private TextView satText;
+    private ImageView mSelfieView;
+    private ImageButton mSelfieButton;
+    private File mSelfieFile;
 
     private Chronometer c;
 
@@ -80,6 +89,9 @@ public class ProfileFragment extends Fragment {
             mProfile.setFirstName(savedInstanceState.getString(KEY_FIRST_NAME));
             Log.i(TAG, "The name is " + mProfile.getFirstName());
         }
+
+        mSelfieFile = mProfile.getPhotoFile(getActivity());
+
     }
 
     @Override
@@ -103,6 +115,9 @@ public class ProfileFragment extends Fragment {
 
         gpa = (EditText)rootView.findViewById(R.id.gpa);
         sat = (EditText)rootView.findViewById(R.id.sat);
+
+        gpaText = (TextView) rootView.findViewById(R.id.gpaText);
+        satText = (TextView) rootView.findViewById(R.id.satText);
 
         mFirstName.setText(mProfile.getFirstName());
         mLastName.setText(mProfile.getLastName());
@@ -156,6 +171,11 @@ public class ProfileFragment extends Fragment {
 
         gpa.setTypeface(ApplicantActivity.tf);
         sat.setTypeface(ApplicantActivity.tf);
+
+        mSelfieView = (ImageView) rootView.findViewById(R.id.profilePic);
+        mSelfieButton = (ImageButton) rootView.findViewById(R.id.profile_camera);
+
+        final Intent captureSelfie = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         return rootView;
 
@@ -216,7 +236,7 @@ public class ProfileFragment extends Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            sat.setText(mProfile.getSAT());
+            satText.setText("SAT Score: " + mProfile.getSAT());
         }
     }
 
@@ -228,12 +248,16 @@ public class ProfileFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mProfile.setGPA(Double.parseDouble(s.toString()));
+            try {
+                mProfile.setGPA(Double.parseDouble(s.toString()));
+            }catch(NumberFormatException e){
+                e.printStackTrace();
+            }
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-            gpa.setText(Double.toString(mProfile.getGPA()));
+            gpaText.setText("GPA Score: " + Double.toString(mProfile.getGPA()));
         }
     }
 
@@ -280,8 +304,8 @@ public class ProfileFragment extends Fragment {
             mFirstName.setText(mProfile.getFirstName());
             mLastName.setText(mProfile.getLastName());
             updateDoB();
-            sat.setText(mProfile.getSAT());
-            gpa.setText(Double.toString(mProfile.getGPA()));
+            //sat.setText(mProfile.getSAT());
+            //gpa.setText(Double.toString(mProfile.getGPA()));
         } catch (Exception e) {
             mProfile = new Profile();
             Log.e(TAG, "Error loading profile from: " + FILENAME, e);
@@ -309,6 +333,9 @@ public class ProfileFragment extends Fragment {
         c.stop();
         Log.d(TAG, "Fragment destroyed.");
     }
+
+
+
 
 }
 

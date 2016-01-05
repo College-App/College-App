@@ -1,10 +1,13 @@
 package org.pltw.examples.collegeapp;
 
 
+import android.content.Context;
+import android.os.Environment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -17,6 +20,7 @@ public class Profile implements ApplicantData{
     private static final String JSON_DOB = "dob";
     private static final String JSON_GPA = "gpa";
     private static final String JSON_SAT = "sat";
+    private static final String PHOTO_FILENAME = "IMG_PROFILE.jpg";
 
     private String mFirstName;
     private String mLastName;
@@ -65,8 +69,8 @@ public class Profile implements ApplicantData{
         json.put(JSON_FIRST_NAME, mFirstName);
         json.put(JSON_LAST_NAME, mLastName);
         json.put(JSON_DOB, mDateOfBirth.getTime());
-        json.put(JSON_GPA, GPA);
-        json.put(JSON_SAT, SAT);
+        //json.put(JSON_GPA, GPA);
+        //json.put(JSON_SAT, SAT);
         System.out.println("Date of Birth Saved: " + mDateOfBirth);
         return json;
     }
@@ -92,13 +96,23 @@ public class Profile implements ApplicantData{
         mFirstName = json.getString(JSON_FIRST_NAME);
         mLastName = json.getString(JSON_LAST_NAME);
         mDateOfBirth = new Date(json.getLong(JSON_DOB));
-        GPA = Double.parseDouble(json.getString(JSON_GPA));
-        SAT = Integer.parseInt(json.getString(JSON_SAT));
+        //GPA = Double.parseDouble(json.getString(JSON_GPA));
+        //SAT = Integer.parseInt(json.getString(JSON_SAT));
 
     }
 
     public String toString() {
         return mFirstName + " " + mLastName + " " + mDateOfBirth.getTime();
+    }
+
+    public String getPhotoFileName(){
+
+    }
+
+    public File getPhotoFile(Context context){
+        File externalFileDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if(externalFileDir == null) return null;
+        return new File(externalFileDir, getPhotoFileName());
     }
 
 }
